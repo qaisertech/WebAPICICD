@@ -4,6 +4,9 @@ on:
   push:
     branches:
     - main
+env:
+  AZURE_WABAPP_NAME: QaiserWebAPPCICD
+  AZURE_WEBAPP_PACKAGE_PATH: "./publish"
 
 jobs:
   publish:
@@ -24,7 +27,14 @@ jobs:
         run: dotnet build ./WebAPICICD/WebAPICICD.sln --configuration Release --no-restore
 
       - name: publish
-        run: dotnet publish ./WebAPICICD/WebAPICICD.sln --configuration Release --no-build
+        run: dotnet publish ./WebAPICICD/WebAPICICD.sln --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+
+      - name: deployment
+        uses: actions/webapps-deploye@v2
+        with:
+          app-name: ${{ env.AZURE_WABAPP_NAME }}
+          publish-profile: ${{ secret.AZURE_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
         
 
         
