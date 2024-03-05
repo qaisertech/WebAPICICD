@@ -27,7 +27,7 @@ jobs:
         run: dotnet build ./WebAPICICD/WebAPICICD.sln --configuration Release --no-restore
 
       - name: publish
-        run: dotnet publish ./WebAPICICD/WebAPICICD.sln --configuration Release --no-build --property:PublishDir '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+        run: dotnet publish ./WebAPICICD/WebAPICICD.sln --configuration Release --no-build
 
       - name: deployment
         uses: azure/webapps-deploy@v2
