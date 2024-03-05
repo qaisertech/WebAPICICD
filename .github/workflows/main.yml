@@ -18,13 +18,13 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore
-        run: dotnet restore ./WebAPICICD/WebAPICICD.sln
+        run: dotnet restore ./WebAPICICD.sln
 
       - name: Build
-        run: dotnet build ./WebAPICICD/WebAPICICD.sln --configuration Release --no-restore
+        run: dotnet build ./WebAPICICD.sln --configuration Release --no-restore
 
       - name: publish
-        run: dotnet publish ./WebAPICICD/WebAPICICD.sln --configuration Release --no-build
+        run: dotnet publish ./WebAPICICD.sln --configuration Release --no-build
         
 
         
